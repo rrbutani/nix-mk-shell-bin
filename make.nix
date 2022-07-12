@@ -19,7 +19,6 @@ let
     outputs = builtins.listToAttrs outputs';
   in
     derivation (scrubbed // {
-      name = scrubbed.name + "-env";
       args = [./get-env.sh];
     } // outputs);
 
