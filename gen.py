@@ -93,7 +93,7 @@ def make_rc_script(env):
     for i in ["TMP", "TMPDIR", "TEMP", "TEMPDIR"]:
         yield f"export {i}=\"$NIX_BUILD_TOP\"\n"
 
-    yield "eval \"$shellHook\""
+    yield "eval \"$shellHook\"\n"
 
 # https://github.com/NixOS/nix/blob/1e55ee2961eabd6016dfef1793996ded97c9054c/src/libutil/util.cc#L1363
 def rewrite(s: str, rewrites: List[Tuple[str, str]]) -> str:
