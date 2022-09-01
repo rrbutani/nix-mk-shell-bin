@@ -36,11 +36,10 @@ let
 
   envScript = nixpkgs.stdenvNoCC.mkDerivation ({
     name = scrubbed.name + "-gen-bashrc";
-    script = ./gen.py;
     envInp = "${envDetails}";
     unpackPhase = "true";
     buildPhase = ''
-      ${nixpkgs.python3}/bin/python3 $script > $out
+      ${nixpkgs.python3}/bin/python3 ${./gen.py} > $out
     '';
     installPhase = "true";
   } // promptAttrs);
