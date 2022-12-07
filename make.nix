@@ -51,7 +51,7 @@ in
     installPhase = ''
       mkdir -p $out/bin
       echo "#!/usr/bin/env ${nixpkgs.bash}/bin/bash" >> $out/bin/$name
-      echo "exec ${nixpkgs.bashInteractive}/bin/bash --rcfile ${envScript}" >> $out/bin/$name
+      echo 'exec ${nixpkgs.bashInteractive}/bin/bash --rcfile ${envScript} "$@"' >> $out/bin/$name
 
       chmod +x $out/bin/$name
     '';
