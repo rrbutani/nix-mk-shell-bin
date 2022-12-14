@@ -82,6 +82,7 @@ def make_rc_script(env):
     yield "unset shellHook\n"
 
     for v in SAVED:
+        yield f"{v}=\"${{{v}:-}}\"\n"
         yield f"nix_saved_{v}=\"${v}\"\n"
 
     yield from process(env)
