@@ -24,7 +24,7 @@ Sure. This repo is packaged as a [flake](https://nixos.wiki/wiki/Flakes), so:
   inputs.msb = github:rrbutani/nix-mk-shell-bin;
 
   # Use `mkShellBin`, exposed under `lib`:
-  outputs = { msb, .. }: let
+  outputs = { msb, ... }: let
     mkShellBin = msb.lib.mkShellBin;
   in {
     # ...
@@ -43,16 +43,17 @@ Sure. This repo is packaged as a [flake](https://nixos.wiki/wiki/Flakes), so:
 ```
 
 Here's an example flake that you can run:
+<!-- EXAMPLE: flake.nix -->
 ```nix
 {
   inputs = {
     msb.url = github:rrbutani/nix-mk-shell-bin;
-    nixpkgs.url = github:nixOS/nixpkgs/22.05;
+    nixpkgs.url = github:nixOS/nixpkgs/22.11;
     flu.url = github:numtide/flake-utils;
   };
 
   outputs = { msb, nixpkgs, flu, ... }: with msb.lib; with flu.lib; eachDefaultSystem(system: let
-    np = import nixpkgs { inherit system; };
+    np = nixpkgs.legacyPackages.${system};
 
     # Like `nix-shell`, this will build the dependencies of `pkg` but not
     # `pkg` itself.
@@ -77,6 +78,71 @@ Here's an example flake that you can run:
   });
 }
 ```
+<!-- EXAMPLE: flake.nix -->
+
+<!-- EXAMPLE: flake.lock -->
+<!--
+{
+  "nodes": {
+    "flu": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "msb": {
+      "locked": {
+        "lastModified": 1662002159,
+        "narHash": "sha256-wNRqslo43TVheciW/auWXv1gGT97N+B5iirdhVthxfg=",
+        "owner": "rrbutani",
+        "repo": "nix-mk-shell-bin",
+        "rev": "b671559e49338199c3d5ac434ea4b1f61f53df0f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rrbutani",
+        "repo": "nix-mk-shell-bin",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1669833724,
+        "narHash": "sha256-/HEZNyGbnQecrgJnfE8d0WC5c1xuPSD2LUpB6YXlg4c=",
+        "owner": "nixOS",
+        "repo": "nixpkgs",
+        "rev": "4d2b37a84fad1091b9de401eb450aae66f1a741e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixOS",
+        "ref": "22.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flu": "flu",
+        "msb": "msb",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
+-->
+<!-- EXAMPLE: flake.lock -->
 
 ## anything else?
 
