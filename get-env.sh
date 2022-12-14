@@ -1,4 +1,4 @@
-# Comes from `nix`: https://github.com/NixOS/nix/blob/4248174e7165f48f92416d13b862e3ef8192a34b/src/nix/get-env.sh
+# Comes from `nix`: https://github.com/NixOS/nix/blob/db026103b18fb8b5a719594502edd0f89eb9c268/src/nix/get-env.sh
 
 set -e
 if [ -e .attrs.sh ]; then source .attrs.sh; fi
@@ -45,6 +45,7 @@ __dumpEnv() {
         local __var_name="${BASH_REMATCH[2]}"
 
         if [[ $__var_name =~ ^BASH_ || \
+              $__var_name =~ ^COMP_ || \
               $__var_name = _ || \
               $__var_name = DIRSTACK || \
               $__var_name = EUID || \
@@ -56,7 +57,9 @@ __dumpEnv() {
               $__var_name = PWD || \
               $__var_name = RANDOM || \
               $__var_name = SHLVL || \
-              $__var_name = SECONDS \
+              $__var_name = SECONDS || \
+              $__var_name = EPOCHREALTIME || \
+              $__var_name = EPOCHSECONDS \
             ]]; then continue; fi
 
         if [[ -z $__first ]]; then printf ',\n'; else __first=; fi
