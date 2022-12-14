@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
+# Based on `nix/develop.cc`; last updated to:
+# https://github.com/NixOS/nix/blob/27be54ca533933db8c3e0cde4b213abf10dd5237/src/nix/develop.cc
+
 import json
 import os
-import sys
 from typing import List, Tuple
 
-# https://github.com/NixOS/nix/blob/155c57c17131770a33dbd86055684d3605a0d505/src/nix/develop.cc#L241
+# https://github.com/NixOS/nix/blob/27be54ca533933db8c3e0cde4b213abf10dd5237/src/nix/develop.cc#L241-L259
 IGNORE = [
     "BASHOPTS",
     "HOME",
@@ -14,6 +16,7 @@ IGNORE = [
     "NIX_LOG_FD",
     "NIX_REMOTE",
     "PPID",
+    "SHELL",
     "SHELLOPTS",
     "SSL_CERT_FILE",
     "TEMP",
