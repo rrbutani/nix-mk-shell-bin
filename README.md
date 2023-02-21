@@ -68,8 +68,8 @@ Here's an example flake that you can run:
     shellBin = msb.lib.mkShellBin { drv = shell; nixpkgs = np; bashPrompt = "[hello]$ "; };
 
   in {
-    # You can run `nix bundle` and get a self-contained executable that,
-    # when run, drops you into a shell containing `pkg`.
+    # You can run `nix bundle` and get a self-contained executable that, when
+    # run, drops you into a shell containing `pkg`.
     packages.default = shellBin;
     packages.pkgShellBin = pkgShellBin;
 
@@ -78,6 +78,11 @@ Here's an example flake that you can run:
 
     # The above is more or less equivalent to:
     devShells.default = shell;
+
+    # For more advanced usage, the env file that `mkShellBin` produces is also
+    # available under `.envScript`; you can source this from within your own
+    # scripts or pass this to bash as an `--rcfile` yourself.
+    packages.envScript = pkgShellBin.envScript;
   });
 }
 ```
