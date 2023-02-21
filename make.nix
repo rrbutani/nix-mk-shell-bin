@@ -36,7 +36,7 @@ let
   };
 
   envScript = nixpkgs.stdenvNoCC.mkDerivation ({
-    name = scrubbed.name + "-gen-bashrc";
+    name = scrubbed.name + "-bashrc";
     envInp = "${envDetails}";
     unpackPhase = "true";
     buildPhase = ''
@@ -55,4 +55,5 @@ in
 
       chmod +x $out/bin/$name
     '';
+    passthru = { inherit envScript; };
   }
