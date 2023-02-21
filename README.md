@@ -2,6 +2,9 @@
 
 `nix develop`, but at build time.
 
+> **Note**
+> See NixOS/nixpkgs#206915.
+
 ## what
 
 This is a nix expression that replicates the [transformation `nix develop` does on derivations](https://github.com/NixOS/nix/blob/4248174e7165f48f92416d13b862e3ef8192a34b/src/nix/develop.cc#L464-L569), ultimately yielding a script that, when run, drops you into a `nix develop`-like shell.
