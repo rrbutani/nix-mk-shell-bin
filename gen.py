@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Based on `nix/develop.cc`; last updated to:
-# https://github.com/NixOS/nix/blob/27be54ca533933db8c3e0cde4b213abf10dd5237/src/nix/develop.cc
+# https://github.com/NixOS/nix/blob/fa4733fce5e473901ccb5dfd08593c861a4e1f0e/src/nix/develop.cc
 
 import json
 import os

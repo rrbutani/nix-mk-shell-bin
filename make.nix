@@ -5,13 +5,14 @@
 , bashPromptSuffix ? null
 }:
 let
-  # https://github.com/NixOS/nix/blob/155c57c17131770a33dbd86055684d3605a0d505/src/nix/develop.cc#L178
-  scrubbed = builtins.removeAttrs drv.drvAttrs [
+  # https://github.com/NixOS/nix/blob/94cf0da7b2955d5b54a142b9e920332746a61033/src/nix/develop.cc#L190
+  scrubbed = (builtins.removeAttrs drv.drvAttrs [
     "allowedReferences"
     "allowedRequisites"
     "disallowedReferences"
     "disallowedRequisites"
-  ];
+    "name"
+  ]) // { name = "${drv.name}-env"; };
   envDetails = let
     outputs' = builtins.map (n:
       { name = n; value = builtins.placeholder n; }
