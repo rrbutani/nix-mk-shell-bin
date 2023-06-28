@@ -66,7 +66,7 @@ def process(env):
                 f"[{shell_escape(k)}]={shell_escape(v)}"
                 for k, v in val.items()
             )
-            yield f"delcare -A {name}=({arr})\n"
+            yield f"declare -A {name}=({arr})\n"
 
     for name, val in env["bashFunctions"].items():
         yield f"{name}()\n{{\n{val}}}\n"
